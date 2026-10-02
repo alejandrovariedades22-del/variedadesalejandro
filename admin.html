@@ -3,91 +3,132 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Administración - Variedades Alejandro</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="admin.css">
+    <meta name="theme-color" content="#173d58">
+    <title>Panel administrativo | Variedades Alejandro</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/admin.css">
 </head>
-<body>
+<body class="admin-page">
+    <main class="auth-screen" id="loginScreen">
+        <section class="auth-card" aria-labelledby="loginTitle">
+            <a class="auth-brand" href="index.html" aria-label="Volver a Variedades Alejandro">
+                <img src="img/logoAV.png" alt="Logo Variedades Alejandro">
+                <span><strong>Variedades Alejandro</strong><small>Administración</small></span>
+            </a>
+            <div class="auth-heading">
+                <p class="eyebrow">Área administrativa</p>
+                <h1 id="loginTitle">Iniciar sesión</h1>
+                <p>Accede para gestionar productos e inventario.</p>
+            </div>
+            <form id="loginForm" class="auth-form">
+                <label class="field-label" for="loginEmail">Correo electrónico</label>
+                <input class="form-control" type="email" id="loginEmail" name="email" autocomplete="username" required>
+                <label class="field-label" for="loginPassword">Contraseña</label>
+                <input class="form-control" type="password" id="loginPassword" name="password" autocomplete="current-password" required>
+                <p class="form-message" id="loginMessage" role="status" aria-live="polite" hidden></p>
+                <button class="button button-primary auth-submit" id="loginSubmit" type="submit">Iniciar sesión</button>
+            </form>
+            <a class="back-to-store" href="index.html">← Volver a la tienda</a>
+        </section>
+        <div class="auth-aside" aria-hidden="true">
+            <img src="img/logoAV.png" alt="">
+            <p>Variedades<br><span>y salón</span></p>
+            <span class="auth-location">Ahuachapán · El Salvador</span>
+        </div>
+    </main>
 
-    <div class="admin-wrapper" id="admin-panel">
-        <header class="dashboard-header">
-            <div class="header-left">
-                <img src="logoAV.png" alt="Logo" class="admin-logo">
-                <div class="header-titles">
-                    <h1>Dashboard de Alejandro</h1>
-                    <p>Gestiona productos y servicios</p>
+    <div class="admin-shell" id="adminPanel" hidden>
+        <aside class="admin-sidebar" id="adminSidebar" aria-label="Navegación administrativa">
+            <a class="sidebar-brand" href="#dashboard">
+                <img src="img/logoAV.png" alt="">
+                <span><strong>Variedades Alejandro</strong><small>Panel administrativo</small></span>
+            </a>
+            <p class="sidebar-label">GESTIÓN</p>
+            <nav class="sidebar-nav">
+                <a class="sidebar-link is-active" href="#dashboard" data-admin-nav="dashboard"><span class="nav-symbol" aria-hidden="true">▦</span>Dashboard</a>
+                <a class="sidebar-link" href="#products" data-admin-nav="products"><span class="nav-symbol" aria-hidden="true">▤</span>Productos</a>
+                <button class="sidebar-link sidebar-add" type="button" data-action="open-create"><span class="nav-symbol" aria-hidden="true">＋</span>Añadir producto</button>
+            </nav>
+            <div class="sidebar-bottom">
+                <span>Variedades &amp; Salón</span>
+                <span>Ahuachapán, El Salvador</span>
+            </div>
+        </aside>
+        <button class="sidebar-backdrop" id="sidebarBackdrop" type="button" aria-label="Cerrar navegación" hidden></button>
+
+        <div class="admin-workspace">
+            <header class="admin-topbar">
+                <button class="icon-button sidebar-toggle" id="sidebarToggle" type="button" aria-label="Abrir navegación" aria-controls="adminSidebar" aria-expanded="false">
+                    <span></span><span></span><span></span>
+                </button>
+                <div class="topbar-title"><span>Administración</span><strong>Productos e inventario</strong></div>
+                <div class="topbar-actions">
+                    <a class="button button-light" href="index.html">Ver tienda</a>
+                    <button class="button button-outline" id="logoutButton" type="button">Cerrar sesión</button>
                 </div>
-            </div>
-            <div class="header-actions">
-                <a href="index.html" class="btn-modern">Ver Tienda Online</a>
-                <button onclick="logout()" class="btn-modern btn-danger">Cerrar Sesión</button>
-            </div>
-        </header>
+            </header>
 
-        <div class="dashboard-grid">
-            <!-- Lado Izquierdo: Formulario -->
-            <aside class="glass-card">
-                <h3 id="form-title" class="form-title">Añadir Producto</h3>
-                <form id="productForm" onsubmit="saveProduct(event)">
-                    <input type="hidden" id="edit-index" value="">
-                    <div class="form-group">
-                        <label>Nombre del Producto</label>
-                        <input type="text" id="formName" class="form-control" required placeholder="Ej: Camisa de Seda">
+            <main class="admin-main">
+                <div class="notice" id="adminNotice" role="status" aria-live="polite" hidden></div>
+                <section class="dashboard-section" id="dashboard" aria-labelledby="dashboardTitle">
+                    <div class="page-heading">
+                        <div><p class="eyebrow">Resumen</p><h1 id="dashboardTitle">Dashboard</h1><p>Vista general del catálogo y el inventario.</p></div>
+                        <button class="button button-primary" type="button" data-action="open-create"><span aria-hidden="true">＋</span>Añadir producto</button>
                     </div>
-                    <div class="form-group">
-                        <label>Precio</label>
-                        <input type="text" id="formPrice" class="form-control" required placeholder="Ej: $25.00">
+                    <div class="stats-grid" aria-label="Resumen de productos">
+                        <article class="stat-card"><span class="stat-icon stat-icon-total" aria-hidden="true">▤</span><div><p>Total de productos</p><strong id="statTotalProducts">—</strong></div></article>
+                        <article class="stat-card"><span class="stat-icon stat-icon-active" aria-hidden="true">✓</span><div><p>Productos activos</p><strong id="statActiveProducts">—</strong></div></article>
+                        <article class="stat-card"><span class="stat-icon stat-icon-hidden" aria-hidden="true">◌</span><div><p>Productos ocultos</p><strong id="statHiddenProducts">—</strong></div></article>
+                        <article class="stat-card"><span class="stat-icon stat-icon-stock" aria-hidden="true">!</span><div><p>Sin stock</p><strong id="statOutOfStock">—</strong></div></article>
                     </div>
-                    <div class="form-group">
-                        <label>Categoría</label>
-                        <!-- VALORES CORREGIDOS Y UNIFICADOS COHERENTEMENTE -->
-                        <select id="productCategory" required>
-                               <option value="mujer-ropa">Ropa Mujer</option>
-                               <option value="hombre-ropa">Ropa Hombre</option>
-                               <option value="mujer-calzado">Calzado</option>
-                               <option value="ninos-ropa">Niños</option>
-                               <option value="juguetes">Juguetes</option> 
-                               <option value="hogar">Hogar y Comodidades</option> 
-                               <option value="corporal">Productos de Belleza</option>
-                               <option value="belleza">Salón</option>
-                               <option value="electro">Electrodomésticos</option>
-                        </select>
+                </section>
+
+                <section class="products-section" id="products" aria-labelledby="productsTitle">
+                    <div class="section-heading">
+                        <div><p class="eyebrow">Catálogo</p><h2 id="productsTitle">Productos</h2><p>Administra la información y disponibilidad de la tienda.</p></div>
                     </div>
-                    <div class="form-group">
-                        <label>Variantes / Tallas</label>
-                        <input type="text" id="formSizes" class="form-control" placeholder="Ej: S, M, L o Única">
+                    <div class="product-toolbar">
+                        <label class="search-field" for="productSearch"><span aria-hidden="true">⌕</span><input type="search" id="productSearch" placeholder="Buscar por nombre" autocomplete="off"></label>
+                        <label class="filter-field"><span class="sr-only">Filtrar por categoría</span><select class="form-control" id="categoryFilter"><option value="all">Todas las categorías</option><option value="mujer-ropa">Ropa Mujer</option><option value="hombre-ropa">Ropa Hombre</option><option value="mujer-calzado">Calzado</option><option value="ninos-ropa">Niños</option><option value="juguetes">Juguetes</option><option value="hogar">Hogar y Comodidades</option><option value="corporal">Productos de Belleza</option><option value="belleza">Salón</option><option value="electro">Electrodomésticos</option></select></label>
+                        <label class="filter-field"><span class="sr-only">Filtrar por estado</span><select class="form-control" id="statusFilter"><option value="all">Todos los estados</option><option value="active">Activos</option><option value="hidden">Ocultos</option></select></label>
                     </div>
-                    <div class="form-group">
-                        <label>Stock disponible</label>
-                        <input type="number" id="formStock" class="form-control" min="0" value="0">
-                    </div>
-                    <div class="form-group">
-                        <label>Imagen del Producto</label>
-                        <input type="file" id="formFile" class="form-control" accept="image/*" onchange="processFile(event)">
-                        <div id="preview-container" class="preview-container">
-                            <img id="img-preview" src="">
+                    <div class="list-heading"><span id="productCount">Cargando productos…</span><span class="list-heading-label">Acciones</span></div>
+                    <div class="product-list" id="adminItemsList" role="list" aria-live="polite" aria-busy="true"></div>
+                </section>
+            </main>
+        </div>
+
+        <div class="product-modal" id="productModal" aria-hidden="true" hidden>
+            <section class="product-dialog" role="dialog" aria-modal="true" aria-labelledby="productModalTitle" tabindex="-1">
+                <header class="dialog-header">
+                    <div><p class="eyebrow" id="productModalEyebrow">Catálogo</p><h2 id="productModalTitle">Añadir producto</h2></div>
+                    <button class="icon-button dialog-close" id="closeProductModal" type="button" data-action="close-modal" aria-label="Cerrar formulario">×</button>
+                </header>
+                <form id="productForm" novalidate>
+                    <input type="hidden" id="editProductId" value="">
+                    <div class="form-grid">
+                        <div class="form-field form-field-wide"><label class="field-label" for="formName">Nombre del producto</label><input class="form-control" type="text" id="formName" name="nombre" required maxlength="160" placeholder="Ej. Camisa de seda"></div>
+                        <div class="form-field"><label class="field-label" for="formPrice">Precio</label><div class="price-input"><span>$</span><input class="form-control" type="number" id="formPrice" name="precio" min="0" step="0.01" required placeholder="0.00"></div></div>
+                        <div class="form-field"><label class="field-label" for="productCategory">Categoría</label><select class="form-control" id="productCategory" name="categoria" required><option value="mujer-ropa">Ropa Mujer</option><option value="hombre-ropa">Ropa Hombre</option><option value="mujer-calzado">Calzado</option><option value="ninos-ropa">Niños</option><option value="juguetes">Juguetes</option><option value="hogar">Hogar y Comodidades</option><option value="corporal">Productos de Belleza</option><option value="belleza">Salón</option><option value="electro">Electrodomésticos</option></select></div>
+                        <div class="form-field"><label class="field-label" for="formSizes">Variantes / tallas</label><input class="form-control" type="text" id="formSizes" name="variante" maxlength="200" placeholder="Ej. S, M, L o Única"></div>
+                        <div class="form-field" id="stockField"><label class="field-label" id="stockLabel" for="formStock">Stock disponible</label><input class="form-control" type="number" id="formStock" name="stock" min="0" step="1" value="0"></div>
+                        <div class="form-field form-field-wide"><span class="field-label">Imagen del producto</span><label class="file-picker" for="formFile"><span aria-hidden="true">＋</span><span id="filePickerText">Seleccionar imagen</span><input type="file" id="formFile" name="imagen" accept="image/*"></label><p class="field-help" id="imageHelp">La imagen actual se conserva si no seleccionas otra.</p>
+                            <div class="image-preview" id="imagePreview" hidden><img id="imagePreviewImage" alt="Vista previa de la imagen del producto"><button class="preview-remove" id="removeImageSelection" type="button" data-action="remove-image">Quitar selección</button></div>
                         </div>
                     </div>
-                    <button type="submit" id="submit-btn" class="btn-modern btn-save">Guardar Producto</button>
-                    <button type="button" id="cancel-edit" onclick="resetForm()" class="btn-modern btn-secondary btn-cancel">Cancelar Edición</button>
+                    <p class="form-message" id="productFormMessage" role="status" aria-live="polite" hidden></p>
+                    <footer class="dialog-actions">
+                        <button class="button button-light" id="cancelProductForm" type="button" data-action="close-modal">Cancelar</button>
+                        <button class="button button-primary" id="saveProductButton" type="submit">Guardar producto</button>
+                    </footer>
                 </form>
-            </aside>
-
-            <!-- Lado Derecho: Inventario -->
-            <main class="glass-card">
-                <div class="search-box">
-                    <input type="text" id="adminSearch" class="form-control" placeholder="🔍 Buscar en el inventario..." oninput="renderAdminList()">
-                </div>
-                <div class="inventory-list" id="adminItemsList">
-                    <!-- Items dinámicos -->
-                </div>
-            </main>
+            </section>
         </div>
     </div>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="supabase.js"></script>
-<script src="auth.js"></script>
-<script src="admin.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/supabase.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/admin.js"></script>
 </body>
 </html>
