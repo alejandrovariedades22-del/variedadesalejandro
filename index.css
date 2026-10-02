@@ -277,7 +277,7 @@ button:focus-visible, a:focus-visible, input:focus-visible {
     align-items: flex-end;
     overflow: hidden;
     color: white;
-    background: #263b47 url('../img/fdportada.png') center 42% / cover no-repeat;
+    background: #263b47 url('fdportada.png') center 42% / cover no-repeat;
 }
 
 .hero::before {
