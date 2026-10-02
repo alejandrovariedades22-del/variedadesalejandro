@@ -4,187 +4,219 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Variedades Alejandro</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="index.css">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/index.css">
 </head>
 <body>
 
     <header class="header">
-        <div class="nav-container">
-            <a href="javascript:void(0);" onclick="window.scrollTo({top: 0, behavior: 'smooth'});" class="logo-area">
-                <img src="logoAV.png" alt="Logo Alejandro" onerror="this.style.display='none';">
-                <div class="logo-text">
+        <nav class="nav-container" aria-label="Navegación principal">
+            <a href="#inicio" class="logo-area" aria-label="Variedades Alejandro, inicio">
+                <img src="img/logoAV.png" alt="Logo Variedades Alejandro" data-hide-on-error>
+                <span class="logo-text">
                     <span class="logo-title">Alejandro</span>
-                    <span class="logo-subtitle">Variedades & Salón</span>
-                </div>
+                    <span class="logo-subtitle">Variedades &amp; Salón</span>
+                </span>
             </a>
 
-            <!-- CONTENEDOR DE CONTROLES: Agrupa las 3 rayitas y el Carrito en la trayectoria derecha -->
-            <div class="nav-controls-wrapper">
-                <!-- 🛒 ICONO DEL CARRITO DE COMPRAS (Ubicado estratégicamente según imagen_510d1f.png) -->
-                <div class="cart-icon-container" onclick="toggleCart(true)">
-                    <svg viewBox="0 0 24 24" class="cart-icon-svg">
-                        <path fill="currentColor" d="M17 18c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2zM7 18c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2zm2.93-1.63c.12-.13.23-.28.3-.44l3.58-6.49c.37-.66-.11-1.48-.87-1.48H5.21l-.94-2H1v2h2l3.6 7.59-1.35 2.44C4.52 15.37 5.48 17 7 17h11v-2H7l1.1-2h1.83zM6.16 6h12.15c1.18 0 1.92 1.28 1.34 2.3l-3.58 6.49c-.37.66-1.11 1.21-1.87 1.21H8.02L6.16 6z"/>
-                    </svg>
-                    <!-- Contador dinámico en rojo -->
-                    <span class="cart-badge" id="cartBadge">0</span>
-                </div>
+            <div class="header-search">
+                <label class="sr-only" for="searchBar">Buscar productos</label>
+                <svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="10.8" cy="10.8" r="6.8"></circle><path d="m16 16 5 5"></path></svg>
+                <input type="search" id="searchBar" class="search-input" placeholder="¿Qué estás buscando?" autocomplete="off">
+            </div>
 
-                <!-- Menú Hamburguesa Nativo -->
-                <input type="checkbox" id="menu-toggle">
-                <label for="menu-toggle" class="menu-icon">
-                    <span></span>
-                    <span></span>
-                    <span></span>
+            <div class="header-actions">
+                <button type="button" class="cart-icon-container" data-action="open-cart" aria-label="Abrir carrito" aria-controls="cartSidebar">
+                    <svg viewBox="0 0 24 24" class="cart-icon-svg" aria-hidden="true">
+                        <path d="M3 4h2l2.1 10.1a2 2 0 0 0 2 1.6h7.8a2 2 0 0 0 1.9-1.4L21 8H6"></path>
+                        <circle cx="9.5" cy="19" r="1.2"></circle><circle cx="17.5" cy="19" r="1.2"></circle>
+                    </svg>
+                    <span class="cart-badge" id="cartBadge" aria-live="polite">0</span>
+                </button>
+
+                <input type="checkbox" id="menu-toggle" aria-label="Abrir menú">
+                <label for="menu-toggle" class="menu-icon" aria-hidden="true">
+                    <span></span><span></span><span></span>
                 </label>
-                
+                <label for="menu-toggle" class="menu-backdrop" aria-hidden="true"></label>
                 <ul class="nav-menu">
-                    <li><a href="javascript:void(0);" class="nav-link" onclick="document.getElementById('menu-toggle').checked = false; window.scrollTo({top: 0, behavior: 'smooth'});">Inicio</a></li>
-                    <li><a href="#catalogo" class="nav-link" onclick="document.getElementById('menu-toggle').checked = false">Catálogo</a></li>
-                    <li><a href="#ubicacion" class="nav-link" onclick="document.getElementById('menu-toggle').checked = false">Ubicación</a></li>
+                    <li><a href="#inicio" class="nav-link">Inicio</a></li>
+                    <li><a href="#catalogo" class="nav-link">Categorías</a></li>
+                    <li><a href="#" id="openLocationModal" class="nav-link">Ubicación</a></li>
+                    <li><a href="#contacto" class="nav-link">Contacto</a></li>
                 </ul>
             </div>
-        </div>
+        </nav>
     </header>
 
-    <section class="hero">
-        <div class="hero-content">
-            <h1>VARIEDADES ALEJANDRO</h1>
-            <p>Explora lo que deseas en nuestra tienda online.</p>
-        </div>
-    </section>
+    <main>
+        <section class="hero" id="inicio" aria-labelledby="heroTitle">
+            <div class="hero-content">
+                <p class="hero-kicker">Variedades &amp; Salón · Ahuachapán</p>
+                <h1 id="heroTitle">Variedades<br><span>Alejandro</span></h1>
+                <p class="hero-copy">Encuentra moda, hogar, belleza y más en nuestra tienda.</p>
+                <a class="hero-cta" href="#catalogo">Explorar catálogo <span aria-hidden="true">↘</span></a>
+            </div>
+            <div class="hero-caption" aria-hidden="true"><span>Variedades</span><i></i><span>Salón</span><i></i><span>Hogar</span></div>
+        </section>
 
-    <main class="container" id="catalogo">
-        <div class="section-title">
-            <h2>Catálogo</h2>
-            <p>Filtrado por categorías para una búsqueda más cómoda</p>
-        </div>
+        <section class="catalog-section" id="catalogo" aria-labelledby="catalogTitle">
+            <div class="container">
+                <div class="section-heading">
+                    <div>
+                        <p class="section-eyebrow">La selección de la tienda</p>
+                        <h2 id="catalogTitle">Explora el catálogo</h2>
+                    </div>
+                    <p class="section-description">Encuentra artículos y servicios de Variedades Alejandro.</p>
+                </div>
 
-        <div class="categories-grid">
-            <div class="cat-card active" data-cat="all" onclick="filterCategory('all')"><span>Todo</span></div>
-            <div class="cat-card" data-cat="mujer-ropa" onclick="filterCategory('mujer-ropa')"><span>Ropa Mujer</span></div>
-            <div class="cat-card" data-cat="hombre-ropa" onclick="filterCategory('hombre-ropa')"><span>Ropa Hombre</span></div>
-            <div class="cat-card" data-cat="mujer-calzado" onclick="filterCategory('mujer-calzado')"><span>Calzado</span></div>
-            <div class="cat-card" data-cat="ninos-ropa" onclick="filterCategory('ninos-ropa')"><span>Niños</span></div>
-            <div class="cat-card" data-cat="juguetes" onclick="filterCategory('juguetes')"><span>Juguetes</span></div> 
-            <div class="cat-card" data-cat="hogar" onclick="filterCategory('hogar')"><span>Hogar y Comodidades</span></div> 
-            <div class="cat-card" data-cat="corporal" onclick="filterCategory('corporal')"><span>Productos de Belleza</span></div>
-            <div class="cat-card" data-cat="belleza" onclick="filterCategory('belleza')"><span>Salón</span></div>
-            <div class="cat-card" data-cat="electro" onclick="filterCategory('electro')"><span>Electrodomésticos</span></div>
-        </div>
+                <div class="categories-grid" id="categorias" role="group" aria-label="Filtrar por categoría">
+                    <button type="button" class="cat-card active" data-cat="all" aria-pressed="true">Todo</button>
+                    <button type="button" class="cat-card" data-cat="mujer-ropa" aria-pressed="false">Ropa Mujer</button>
+                    <button type="button" class="cat-card" data-cat="hombre-ropa" aria-pressed="false">Ropa Hombre</button>
+                    <button type="button" class="cat-card" data-cat="mujer-calzado" aria-pressed="false">Calzado</button>
+                    <button type="button" class="cat-card" data-cat="ninos-ropa" aria-pressed="false">Niños</button>
+                    <button type="button" class="cat-card" data-cat="juguetes" aria-pressed="false">Juguetes</button>
+                    <button type="button" class="cat-card" data-cat="hogar" aria-pressed="false">Hogar y comodidades</button>
+                    <button type="button" class="cat-card" data-cat="corporal" aria-pressed="false">Productos de belleza</button>
+                    <button type="button" class="cat-card" data-cat="belleza" aria-pressed="false">Salón</button>
+                    <button type="button" class="cat-card" data-cat="electro" aria-pressed="false">Electrodomésticos</button>
+                </div>
 
-        <div class="search-wrapper">
-            <input type="text" id="searchBar" class="search-input" placeholder="🔍 Buscar producto por nombre..." oninput="searchProducts()">
-        </div>
-
-        <div class="store-grid" id="storeGrid"></div>
+                <div class="catalog-meta">
+                    <p id="resultsSummary" aria-live="polite">Cargando productos...</p>
+                </div>
+                <div class="catalog-notice" id="catalogNotice" role="status" aria-live="polite" hidden></div>
+                <div class="store-grid" id="storeGrid" aria-busy="true"></div>
+            </div>
+        </section>
     </main>
 
-    <section class="container location" id="ubicacion">
-        <h2>Visítanos</h2>
-        <div class="loc-grid">
-            <div class="loc-left-col">
-                <p class="address-text">
-                    Estamos ubicados en una zona accesible de Ahuachapán, listos para brindarte la mejor atención presencial tanto en nuestra tienda de variedades como en los servicios estéticos del Salón de Belleza.
-                    <br><br>
-                    📍 <strong>Dirección:</strong> C. Zacamil, Ahuachapán, El Salvador
-                </p>
-                <div class="loc-img-container">
-                    <img src="fdlugar.png" alt="Local Variedades Alejandro">
-                </div>
-            </div>
-
-            <div class="map-container">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2246.969927235981!2d-89.84919376014987!3d13.928008312778392!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8f62970058ff4a73%3A0x1b5da5c70f2d0c93!2sVelasquez%20Tours!5e1!3m2!1ses!2ssv!4v1781650886160!5m2!1ses!2ssv" width="600" height="350" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    <footer class="site-footer" id="contacto">
+        <div class="footer-main">
+            <a href="#inicio" class="footer-brand">
+                <img src="img/logoAV.png" alt="Logo Variedades Alejandro" data-hide-on-error>
+                <span><strong>Variedades Alejandro</strong><small>Variedades &amp; Salón</small></span>
+            </a>
+            <div class="footer-details">
+                <div><span class="footer-label">Visítanos</span><button type="button" class="footer-location" data-location-trigger>📍 C. Zacamil, Ahuachapán</button></div>
+                <div><span class="footer-label">Contacto</span><a id="whatsappContactLink" href="https://wa.me/50372215142?text=%C2%A1Hola, tengo una consulta acerca de variedades alejandro%21" target="_blank" rel="noopener noreferrer">WhatsApp · 503 7221 5142</a></div>
             </div>
         </div>
-    </section>
-
-    <footer>
-        <p>© 2026 Variedades Alejandro. Todos los derechos reservados.</p>
-        <p>Ahuachapán, El Salvador</p>
+        <div class="footer-bottom"><span>© 2026 Variedades Alejandro</span><span>Ahuachapán, El Salvador</span></div>
     </footer>
+
+    <div class="location-modal" id="locationModal" aria-hidden="true">
+        <section class="location-modal-content" role="dialog" aria-modal="true" aria-labelledby="locationTitle" tabindex="-1">
+            <div class="location-modal-heading">
+                <h2 id="locationTitle">📍 Nuestra ubicación</h2>
+                <button type="button" class="location-close" aria-label="Cerrar ubicación">✕</button>
+            </div>
+            <div class="location-modal-body">
+                <div class="location-info">
+                    <p class="location-description">
+                        Estamos ubicados en una zona accesible de Ahuachapán, listos para brindarte la mejor atención presencial tanto en nuestra tienda de variedades como en los servicios estéticos del Salón de Belleza.
+                    </p>
+                    <p class="location-address">
+                        📍 <strong>Dirección:</strong> C. Zacamil<br>
+                        <strong>zona:</strong> Ahuachapán, El Salvador
+                    </p>
+                    <a class="location-directions" href="https://www.google.com/maps/dir/?api=1&amp;destination=13.928008312778392%2C-89.84919376014987" target="_blank" rel="noopener noreferrer">Cómo llegar</a>
+                </div>
+                <div class="location-visual">
+                    <div class="location-map">
+                        <iframe title="Mapa de ubicación de Variedades Alejandro" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2246.969927235981!2d-89.84919376014987!3d13.928008312778392!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8f62970058ff4a73%3A0x1b5da5c70f2d0c93!2sVelasquez%20Tours!5e1!3m2!1ses!2ssv!4v1781650886160!5m2!1ses!2ssv" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                    <div class="location-image">
+                        <img src="img/fdlugar.png" alt="Local Variedades Alejandro">
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
 
     <!-- ==========================================================================
        MODAL DE DETALLES (RECONFIGURADO PARA AGREGAR AL CARRITO)
        ========================================================================== -->
-    <div class="modal" id="productModal">
-        <div class="modal-content-wide">
-            <button type="button" class="close-modal" onclick="closeProductModal()">✕</button>
+    <div class="modal" id="productModal" aria-hidden="true">
+        <section class="modal-content-wide" role="dialog" aria-modal="true" aria-labelledby="modalTitle" tabindex="-1">
+            <button type="button" class="close-modal" data-action="close-product" aria-label="Cerrar producto">✕</button>
             
             <div class="modal-left-column">
                 <div class="modal-img-container">
-                    <img id="modalImg" src="" alt="Vista previa">
+                    <img id="modalImg" alt="Vista previa" hidden>
+                    <span class="product-image-placeholder" id="modalImagePlaceholder" hidden>Imagen no disponible</span>
                 </div>
             </div>
             
             <div class="modal-right-column">
                 <h3 id="modalTitle" class="modal-product-title"></h3>
                 <p id="modalPrice" class="modal-product-price"></p>
+                <p id="modalStock" class="modal-stock-info" hidden></p>
                 
-                <p class="modal-product-desc">Artículo disponible en Variedades Alejandro. Haz tu consulta directa por WhatsApp.</p>
+                <p id="modalProductDescription" class="modal-product-desc">Artículo disponible en Variedades Alejandro. Consulta por WhatsApp.</p>
                 
-                <div class="size-selector" id="sizeSelectorArea">
+                <div class="size-selector">
                     <span class="size-label" id="variantLabel">TALLAS DISPONIBLES</span>
                     <div class="size-options" id="sizeOptionsBox"></div>
                 </div>
 
                 <div class="qty-area" id="qtyArea">
                     <div class="qty-controls">
-                        <button type="button" class="qty-btn" onclick="updateQty(-1)">-</button>
+                        <button type="button" class="qty-btn" id="decreaseQty" data-qty-change="-1" aria-label="Disminuir cantidad">-</button>
                         <span class="qty-val" id="qtyVal">1</span>
-                        <button type="button" class="qty-btn" onclick="updateQty(1)">+</button>
+                        <button type="button" class="qty-btn" id="increaseQty" data-qty-change="1" aria-label="Aumentar cantidad">+</button>
                     </div>
                 </div>
 
                 <!-- CORRECCIÓN: Ahora añade al carrito local en lugar de disparar el link externo directo -->
-                <button type="button" class="send-wp-final" id="addToCartBtn" onclick="addToCartCurrent()">
+                <button type="button" class="send-wp-final" id="addToCartBtn" data-action="add-to-cart">
                     <span>Agregar al carrito de compras</span>
                 </button>
             </div>
-        </div>
+        </section>
     </div>
 
     <!-- ==========================================================================
        NUEVO PANEL LATERAL: EL CARRITO DE COMPRAS (DRAWER SIDEBAR)
        ========================================================================== -->
-    <div class="cart-sidebar" id="cartSidebar">
+    <aside class="cart-sidebar" id="cartSidebar" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="cartTitle" tabindex="-1">
         <div class="cart-sidebar-header">
-            <h3>Tus elecciones</h3>
-            <button class="close-cart-btn" onclick="toggleCart(false)">✕</button>
+            <h3 id="cartTitle">Tu carrito</h3>
+            <button type="button" class="close-cart-btn" data-action="close-cart" aria-label="Cerrar carrito">✕</button>
         </div>
         
         <!-- Lista de productos añadidos (Se genera con JavaScript) -->
-        <div class="cart-items-container" id="cartItemsList">
-            <!-- Ejemplo de estructura vacía inicial -->
+        <div class="cart-items-container" id="cartItemsList" aria-live="polite">
             <p class="empty-cart-msg">Tu carrito está vacío.</p>
         </div>
         
         <!-- Resumen financiero y Botón de Despacho Final -->
         <div class="cart-sidebar-footer">
+            <p class="cart-notice" id="cartNotice" role="status" aria-live="polite">El total es estimado. Enviar una consulta no confirma una compra ni reserva.</p>
             <div class="cart-total-row">
                 <span>Total estimado:</span>
                 <span id="cartTotalVal">$0.00</span>
             </div>
-            <button class="btn-checkout-whatsapp" onclick="checkoutCartWhatsApp()">
-                <span>Confirmar pedido por WhatsApp →</span>
+            <button class="btn-checkout-whatsapp" id="checkoutButton" data-action="checkout" type="button" disabled>
+                <span>Consultar disponibilidad por WhatsApp →</span>
             </button>
         </div>
-    </div>
+    </aside>
     <!-- Fondo oscuro traslúcido para cuando el carrito se abra -->
-    <div class="cart-overlay" id="cartOverlay" onclick="toggleCart(false)"></div>
+    <button type="button" class="cart-overlay" id="cartOverlay" data-action="close-cart" aria-label="Cerrar carrito" aria-hidden="true"></button>
 
     <!-- ==========================================================================
        BOTÓN FLOTANTE GENERAL DE WHATSAPP (CORREGIDO SEGÚN IMAGEN_509CC0)
        ========================================================================== -->
-    <a href="https://wa.me/50372215142?text=%C2%A1Hola, tengo una consulta acerca de variedades alejandro%21" class="whatsapp-float" target="_blank" title="Consultas Generales">
+    <a href="https://wa.me/50372215142?text=%C2%A1Hola, tengo una consulta acerca de variedades alejandro%21" class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="Consultas generales por WhatsApp" title="Consultas generales">
         <svg viewBox="0 0 24 24">
             <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.516 2.266 2.27 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.713-1.457L0 24zm6.59-4.846c1.66.986 3.288 1.498 4.76 1.499 5.429 0 9.847-4.388 9.849-9.782.001-2.613-1.013-5.069-2.858-6.917-1.847-1.848-4.301-2.865-6.92-2.865-5.432 0-9.851 4.39-9.854 9.784-.002 1.703.486 3.3 1.412 4.697l-.992 3.622 3.73-.976zm11.238-6.147c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" />
         </svg>
     </a>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="supabase.js"></script>
-    <script src="index.js"></script>
+    <script src="js/supabase.js"></script>
+    <script src="js/index.js"></script>
 </body>
 </html>
