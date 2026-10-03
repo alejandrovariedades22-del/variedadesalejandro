@@ -3,132 +3,221 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#173d58">
-    <title>Panel administrativo | Variedades Alejandro</title>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="admin.css">
+    <title>Variedades Alejandro</title>
+    <link rel="icon" type="image/png" sizes="500x500" href="logoAV.png">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="index.css">
 </head>
-<body class="admin-page">
-    <main class="auth-screen" id="loginScreen">
-        <section class="auth-card" aria-labelledby="loginTitle">
-            <a class="auth-brand" href="index.html" aria-label="Volver a Variedades Alejandro">
-                <img src="logoAV.png" alt="Logo Variedades Alejandro">
-                <span><strong>Variedades Alejandro</strong><small>Administración</small></span>
+<body>
+
+    <header class="header">
+        <nav class="nav-container" aria-label="Navegación principal">
+            <a href="#inicio" class="logo-area" aria-label="Variedades Alejandro, inicio">
+                <img src="logoAV.png" alt="Logo Variedades Alejandro" data-hide-on-error>
+                <span class="logo-text">
+                    <span class="logo-title">Alejandro</span>
+                    <span class="logo-subtitle">Variedades &amp; Salón</span>
+                </span>
             </a>
-            <div class="auth-heading">
-                <p class="eyebrow">Área administrativa</p>
-                <h1 id="loginTitle">Iniciar sesión</h1>
-                <p>Accede para gestionar productos e inventario.</p>
+
+            <div class="header-search">
+                <label class="sr-only" for="searchBar">Buscar productos</label>
+                <svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="10.8" cy="10.8" r="6.8"></circle><path d="m16 16 5 5"></path></svg>
+                <input type="search" id="searchBar" class="search-input" placeholder="¿Qué estás buscando?" autocomplete="off">
             </div>
-            <form id="loginForm" class="auth-form">
-                <label class="field-label" for="loginEmail">Correo electrónico</label>
-                <input class="form-control" type="email" id="loginEmail" name="email" autocomplete="username" required>
-                <label class="field-label" for="loginPassword">Contraseña</label>
-                <input class="form-control" type="password" id="loginPassword" name="password" autocomplete="current-password" required>
-                <p class="form-message" id="loginMessage" role="status" aria-live="polite" hidden></p>
-                <button class="button button-primary auth-submit" id="loginSubmit" type="submit">Iniciar sesión</button>
-            </form>
-            <a class="back-to-store" href="index.html">← Volver a la tienda</a>
+
+            <div class="header-actions">
+                <button type="button" class="cart-icon-container" data-action="open-cart" aria-label="Abrir carrito" aria-controls="cartSidebar">
+                    <svg viewBox="0 0 24 24" class="cart-icon-svg" aria-hidden="true">
+                        <path d="M3 4h2l2.1 10.1a2 2 0 0 0 2 1.6h7.8a2 2 0 0 0 1.9-1.4L21 8H6"></path>
+                        <circle cx="9.5" cy="19" r="1.2"></circle><circle cx="17.5" cy="19" r="1.2"></circle>
+                    </svg>
+                    <span class="cart-badge" id="cartBadge" aria-live="polite">0</span>
+                </button>
+
+                <input type="checkbox" id="menu-toggle" aria-label="Abrir menú">
+                <label for="menu-toggle" class="menu-icon" aria-hidden="true">
+                    <span></span><span></span><span></span>
+                </label>
+                <label for="menu-toggle" class="menu-backdrop" aria-hidden="true"></label>
+                <ul class="nav-menu">
+                    <li><a href="#inicio" class="nav-link">Inicio</a></li>
+                    <li><a href="#catalogo" class="nav-link">Categorías</a></li>
+                    <li><a href="#" id="openLocationModal" class="nav-link">Ubicación</a></li>
+                    <li><a href="#contacto" class="nav-link">Contacto</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero" id="inicio" aria-labelledby="heroTitle">
+            <div class="hero-content">
+                <p class="hero-kicker">Variedades &amp; Salón · Ahuachapán</p>
+                <h1 id="heroTitle">Variedades<br><span>Alejandro</span></h1>
+                <p class="hero-copy">Encuentra moda, hogar, belleza y más en nuestra tienda.</p>
+                <a class="hero-cta" href="#catalogo">Explorar catálogo <span aria-hidden="true">↘</span></a>
+            </div>
+            <div class="hero-caption" aria-hidden="true"><span>Variedades</span><i></i><span>Salón</span><i></i><span>Hogar</span></div>
         </section>
-        <div class="auth-aside" aria-hidden="true">
-            <img src="logoAV.png" alt="">
-            <p>Variedades<br><span>y salón</span></p>
-            <span class="auth-location">Ahuachapán · El Salvador</span>
-        </div>
+
+        <section class="catalog-section" id="catalogo" aria-labelledby="catalogTitle">
+            <div class="container">
+                <div class="section-heading">
+                    <div>
+                        <p class="section-eyebrow">La selección de la tienda</p>
+                        <h2 id="catalogTitle">Explora el catálogo</h2>
+                    </div>
+                    <p class="section-description">Encuentra artículos y servicios de Variedades Alejandro.</p>
+                </div>
+
+                <div class="categories-grid" id="categorias" role="group" aria-label="Filtrar por categoría">
+                    <button type="button" class="cat-card active" data-cat="all" aria-pressed="true">Todo</button>
+                    <button type="button" class="cat-card" data-cat="mujer-ropa" aria-pressed="false">Ropa Mujer</button>
+                    <button type="button" class="cat-card" data-cat="hombre-ropa" aria-pressed="false">Ropa Hombre</button>
+                    <button type="button" class="cat-card" data-cat="mujer-calzado" aria-pressed="false">Calzado</button>
+                    <button type="button" class="cat-card" data-cat="ninos-ropa" aria-pressed="false">Niños</button>
+                    <button type="button" class="cat-card" data-cat="juguetes" aria-pressed="false">Juguetes</button>
+                    <button type="button" class="cat-card" data-cat="hogar" aria-pressed="false">Hogar y comodidades</button>
+                    <button type="button" class="cat-card" data-cat="corporal" aria-pressed="false">Productos de belleza</button>
+                    <button type="button" class="cat-card" data-cat="belleza" aria-pressed="false">Salón</button>
+                    <button type="button" class="cat-card" data-cat="electro" aria-pressed="false">Electrodomésticos</button>
+                </div>
+
+                <div class="catalog-meta">
+                    <p id="resultsSummary" aria-live="polite">Cargando productos...</p>
+                </div>
+                <div class="catalog-notice" id="catalogNotice" role="status" aria-live="polite" hidden></div>
+                <div class="store-grid" id="storeGrid" aria-busy="true"></div>
+            </div>
+        </section>
     </main>
 
-    <div class="admin-shell" id="adminPanel" hidden>
-        <aside class="admin-sidebar" id="adminSidebar" aria-label="Navegación administrativa">
-            <a class="sidebar-brand" href="#dashboard">
-                <img src="logoAV.png" alt="">
-                <span><strong>Variedades Alejandro</strong><small>Panel administrativo</small></span>
+    <footer class="site-footer" id="contacto">
+        <div class="footer-main">
+            <a href="#inicio" class="footer-brand">
+                <img src="logoAV.png" alt="Logo Variedades Alejandro" data-hide-on-error>
+                <span><strong>Variedades Alejandro</strong><small>Variedades &amp; Salón</small></span>
             </a>
-            <p class="sidebar-label">GESTIÓN</p>
-            <nav class="sidebar-nav">
-                <a class="sidebar-link is-active" href="#dashboard" data-admin-nav="dashboard"><span class="nav-symbol" aria-hidden="true">▦</span>Dashboard</a>
-                <a class="sidebar-link" href="#products" data-admin-nav="products"><span class="nav-symbol" aria-hidden="true">▤</span>Productos</a>
-                <button class="sidebar-link sidebar-add" type="button" data-action="open-create"><span class="nav-symbol" aria-hidden="true">＋</span>Añadir producto</button>
-            </nav>
-            <div class="sidebar-bottom">
-                <span>Variedades &amp; Salón</span>
-                <span>Ahuachapán, El Salvador</span>
+            <div class="footer-details">
+                <div><span class="footer-label">Visítanos</span><button type="button" class="footer-location" data-location-trigger>📍 C. Zacamil, Ahuachapán</button></div>
+                <div><span class="footer-label">Contacto</span><a id="whatsappContactLink" href="https://wa.me/50372215142?text=%C2%A1Hola, tengo una consulta acerca de variedades alejandro%21" target="_blank" rel="noopener noreferrer">WhatsApp · 503 7221 5142</a></div>
             </div>
-        </aside>
-        <button class="sidebar-backdrop" id="sidebarBackdrop" type="button" aria-label="Cerrar navegación" hidden></button>
+        </div>
+        <div class="footer-bottom"><span>© 2026 Variedades Alejandro</span><span>Ahuachapán, El Salvador</span></div>
+    </footer>
 
-        <div class="admin-workspace">
-            <header class="admin-topbar">
-                <button class="icon-button sidebar-toggle" id="sidebarToggle" type="button" aria-label="Abrir navegación" aria-controls="adminSidebar" aria-expanded="false">
-                    <span></span><span></span><span></span>
-                </button>
-                <div class="topbar-title"><span>Administración</span><strong>Productos e inventario</strong></div>
-                <div class="topbar-actions">
-                    <a class="button button-light" href="index.html">Ver tienda</a>
-                    <button class="button button-outline" id="logoutButton" type="button">Cerrar sesión</button>
+    <div class="location-modal" id="locationModal" aria-hidden="true">
+        <section class="location-modal-content" role="dialog" aria-modal="true" aria-labelledby="locationTitle" tabindex="-1">
+            <div class="location-modal-heading">
+                <h2 id="locationTitle">📍 Nuestra ubicación</h2>
+                <button type="button" class="location-close" aria-label="Cerrar ubicación">✕</button>
+            </div>
+            <div class="location-modal-body">
+                <div class="location-info">
+                    <p class="location-description">
+                        Estamos ubicados en una zona accesible de Ahuachapán, listos para brindarte la mejor atención presencial tanto en nuestra tienda de variedades como en los servicios estéticos del Salón de Belleza.
+                    </p>
+                    <p class="location-address">
+                        📍 <strong>Dirección:</strong> C. Zacamil<br>
+                        <strong>zona:</strong> Ahuachapán, El Salvador
+                    </p>
+                    <a class="location-directions" href="https://www.google.com/maps/dir/?api=1&amp;destination=13.928008312778392%2C-89.84919376014987" target="_blank" rel="noopener noreferrer">Cómo llegar</a>
                 </div>
-            </header>
-
-            <main class="admin-main">
-                <div class="notice" id="adminNotice" role="status" aria-live="polite" hidden></div>
-                <section class="dashboard-section" id="dashboard" aria-labelledby="dashboardTitle">
-                    <div class="page-heading">
-                        <div><p class="eyebrow">Resumen</p><h1 id="dashboardTitle">Dashboard</h1><p>Vista general del catálogo y el inventario.</p></div>
-                        <button class="button button-primary" type="button" data-action="open-create"><span aria-hidden="true">＋</span>Añadir producto</button>
+                <div class="location-visual">
+                    <div class="location-map">
+                        <iframe title="Mapa de ubicación de Variedades Alejandro" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2246.969927235981!2d-89.84919376014987!3d13.928008312778392!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8f62970058ff4a73%3A0x1b5da5c70f2d0c93!2sVelasquez%20Tours!5e1!3m2!1ses!2ssv!4v1781650886160!5m2!1ses!2ssv" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                     </div>
-                    <div class="stats-grid" aria-label="Resumen de productos">
-                        <article class="stat-card"><span class="stat-icon stat-icon-total" aria-hidden="true">▤</span><div><p>Total de productos</p><strong id="statTotalProducts">—</strong></div></article>
-                        <article class="stat-card"><span class="stat-icon stat-icon-active" aria-hidden="true">✓</span><div><p>Productos activos</p><strong id="statActiveProducts">—</strong></div></article>
-                        <article class="stat-card"><span class="stat-icon stat-icon-hidden" aria-hidden="true">◌</span><div><p>Productos ocultos</p><strong id="statHiddenProducts">—</strong></div></article>
-                        <article class="stat-card"><span class="stat-icon stat-icon-stock" aria-hidden="true">!</span><div><p>Sin stock</p><strong id="statOutOfStock">—</strong></div></article>
+                    <div class="location-image">
+                        <img src="fdlugar.png" alt="Local Variedades Alejandro">
                     </div>
-                </section>
-
-                <section class="products-section" id="products" aria-labelledby="productsTitle">
-                    <div class="section-heading">
-                        <div><p class="eyebrow">Catálogo</p><h2 id="productsTitle">Productos</h2><p>Administra la información y disponibilidad de la tienda.</p></div>
-                    </div>
-                    <div class="product-toolbar">
-                        <label class="search-field" for="productSearch"><span aria-hidden="true">⌕</span><input type="search" id="productSearch" placeholder="Buscar por nombre" autocomplete="off"></label>
-                        <label class="filter-field"><span class="sr-only">Filtrar por categoría</span><select class="form-control" id="categoryFilter"><option value="all">Todas las categorías</option><option value="mujer-ropa">Ropa Mujer</option><option value="hombre-ropa">Ropa Hombre</option><option value="mujer-calzado">Calzado</option><option value="ninos-ropa">Niños</option><option value="juguetes">Juguetes</option><option value="hogar">Hogar y Comodidades</option><option value="corporal">Productos de Belleza</option><option value="belleza">Salón</option><option value="electro">Electrodomésticos</option></select></label>
-                        <label class="filter-field"><span class="sr-only">Filtrar por estado</span><select class="form-control" id="statusFilter"><option value="all">Todos los estados</option><option value="active">Activos</option><option value="hidden">Ocultos</option></select></label>
-                    </div>
-                    <div class="list-heading"><span id="productCount">Cargando productos…</span><span class="list-heading-label">Acciones</span></div>
-                    <div class="product-list" id="adminItemsList" role="list" aria-live="polite" aria-busy="true"></div>
-                </section>
-            </main>
-        </div>
-
-        <div class="product-modal" id="productModal" aria-hidden="true" hidden>
-            <section class="product-dialog" role="dialog" aria-modal="true" aria-labelledby="productModalTitle" tabindex="-1">
-                <header class="dialog-header">
-                    <div><p class="eyebrow" id="productModalEyebrow">Catálogo</p><h2 id="productModalTitle">Añadir producto</h2></div>
-                    <button class="icon-button dialog-close" id="closeProductModal" type="button" data-action="close-modal" aria-label="Cerrar formulario">×</button>
-                </header>
-                <form id="productForm" novalidate>
-                    <input type="hidden" id="editProductId" value="">
-                    <div class="form-grid">
-                        <div class="form-field form-field-wide"><label class="field-label" for="formName">Nombre del producto</label><input class="form-control" type="text" id="formName" name="nombre" required maxlength="160" placeholder="Ej. Camisa de seda"></div>
-                        <div class="form-field"><label class="field-label" for="formPrice">Precio</label><div class="price-input"><span>$</span><input class="form-control" type="number" id="formPrice" name="precio" min="0" step="0.01" required placeholder="0.00"></div></div>
-                        <div class="form-field"><label class="field-label" for="productCategory">Categoría</label><select class="form-control" id="productCategory" name="categoria" required><option value="mujer-ropa">Ropa Mujer</option><option value="hombre-ropa">Ropa Hombre</option><option value="mujer-calzado">Calzado</option><option value="ninos-ropa">Niños</option><option value="juguetes">Juguetes</option><option value="hogar">Hogar y Comodidades</option><option value="corporal">Productos de Belleza</option><option value="belleza">Salón</option><option value="electro">Electrodomésticos</option></select></div>
-                        <div class="form-field"><label class="field-label" for="formSizes">Variantes / tallas</label><input class="form-control" type="text" id="formSizes" name="variante" maxlength="200" placeholder="Ej. S, M, L o Única"></div>
-                        <div class="form-field" id="stockField"><label class="field-label" id="stockLabel" for="formStock">Stock disponible</label><input class="form-control" type="number" id="formStock" name="stock" min="0" step="1" value="0"></div>
-                        <div class="form-field form-field-wide"><span class="field-label">Imagen del producto</span><label class="file-picker" for="formFile"><span aria-hidden="true">＋</span><span id="filePickerText">Seleccionar imagen</span><input type="file" id="formFile" name="imagen" accept="image/*"></label><p class="field-help" id="imageHelp">La imagen actual se conserva si no seleccionas otra.</p>
-                            <div class="image-preview" id="imagePreview" hidden><img id="imagePreviewImage" alt="Vista previa de la imagen del producto"><button class="preview-remove" id="removeImageSelection" type="button" data-action="remove-image">Quitar selección</button></div>
-                        </div>
-                    </div>
-                    <p class="form-message" id="productFormMessage" role="status" aria-live="polite" hidden></p>
-                    <footer class="dialog-actions">
-                        <button class="button button-light" id="cancelProductForm" type="button" data-action="close-modal">Cancelar</button>
-                        <button class="button button-primary" id="saveProductButton" type="submit">Guardar producto</button>
-                    </footer>
-                </form>
-            </section>
-        </div>
+                </div>
+            </div>
+        </section>
     </div>
+
+    <!-- ==========================================================================
+       MODAL DE DETALLES (RECONFIGURADO PARA AGREGAR AL CARRITO)
+       ========================================================================== -->
+    <div class="modal" id="productModal" aria-hidden="true">
+        <section class="modal-content-wide" role="dialog" aria-modal="true" aria-labelledby="modalTitle" tabindex="-1">
+            <button type="button" class="close-modal" data-action="close-product" aria-label="Cerrar producto">✕</button>
+            
+            <div class="modal-left-column">
+                <div class="modal-img-container">
+                    <img id="modalImg" alt="Vista previa" hidden>
+                    <span class="product-image-placeholder" id="modalImagePlaceholder" hidden>Imagen no disponible</span>
+                </div>
+            </div>
+            
+            <div class="modal-right-column">
+                <h3 id="modalTitle" class="modal-product-title"></h3>
+                <p id="modalPrice" class="modal-product-price"></p>
+                <p id="modalStock" class="modal-stock-info" hidden></p>
+                
+                <p id="modalProductDescription" class="modal-product-desc">Artículo disponible en Variedades Alejandro. Consulta por WhatsApp.</p>
+                
+                <div class="size-selector">
+                    <span class="size-label" id="variantLabel">TALLAS DISPONIBLES</span>
+                    <div class="size-options" id="sizeOptionsBox"></div>
+                </div>
+
+                <div class="qty-area" id="qtyArea">
+                    <div class="qty-controls">
+                        <button type="button" class="qty-btn" id="decreaseQty" data-qty-change="-1" aria-label="Disminuir cantidad">-</button>
+                        <span class="qty-val" id="qtyVal">1</span>
+                        <button type="button" class="qty-btn" id="increaseQty" data-qty-change="1" aria-label="Aumentar cantidad">+</button>
+                    </div>
+                </div>
+
+                <!-- CORRECCIÓN: Ahora añade al carrito local en lugar de disparar el link externo directo -->
+                <button type="button" class="send-wp-final" id="addToCartBtn" data-action="add-to-cart">
+                    <span>Agregar al carrito de compras</span>
+                </button>
+            </div>
+        </section>
+    </div>
+
+    <!-- ==========================================================================
+       NUEVO PANEL LATERAL: EL CARRITO DE COMPRAS (DRAWER SIDEBAR)
+       ========================================================================== -->
+    <aside class="cart-sidebar" id="cartSidebar" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="cartTitle" tabindex="-1">
+        <div class="cart-sidebar-header">
+            <h3 id="cartTitle">Tu carrito</h3>
+            <button type="button" class="close-cart-btn" data-action="close-cart" aria-label="Cerrar carrito">✕</button>
+        </div>
+        
+        <!-- Lista de productos añadidos (Se genera con JavaScript) -->
+        <div class="cart-items-container" id="cartItemsList" aria-live="polite">
+            <p class="empty-cart-msg">Tu carrito está vacío.</p>
+        </div>
+        
+        <!-- Resumen financiero y Botón de Despacho Final -->
+        <div class="cart-sidebar-footer">
+            <p class="cart-notice" id="cartNotice" role="status" aria-live="polite">El total es estimado. Enviar una consulta no confirma una compra ni reserva.</p>
+            <div class="cart-total-row">
+                <span>Total estimado:</span>
+                <span id="cartTotalVal">$0.00</span>
+            </div>
+            <button class="btn-checkout-whatsapp" id="checkoutButton" data-action="checkout" type="button" disabled>
+                <span>Consultar disponibilidad por WhatsApp →</span>
+            </button>
+        </div>
+    </aside>
+    <!-- Fondo oscuro traslúcido para cuando el carrito se abra -->
+    <button type="button" class="cart-overlay" id="cartOverlay" data-action="close-cart" aria-label="Cerrar carrito" aria-hidden="true"></button>
+
+    <!-- ==========================================================================
+       BOTÓN FLOTANTE GENERAL DE WHATSAPP (CORREGIDO SEGÚN IMAGEN_509CC0)
+       ========================================================================== -->
+    <a href="https://wa.me/50372215142?text=%C2%A1Hola, tengo una consulta acerca de variedades alejandro%21" class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="Consultas generales por WhatsApp" title="Consultas generales">
+        <svg viewBox="0 0 24 24">
+            <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.516 2.266 2.27 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.713-1.457L0 24zm6.59-4.846c1.66.986 3.288 1.498 4.76 1.499 5.429 0 9.847-4.388 9.849-9.782.001-2.613-1.013-5.069-2.858-6.917-1.847-1.848-4.301-2.865-6.92-2.865-5.432 0-9.851 4.39-9.854 9.784-.002 1.703.486 3.3 1.412 4.697l-.992 3.622 3.73-.976zm11.238-6.147c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" />
+        </svg>
+    </a>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="supabase.js"></script>
-    <script src="auth.js"></script>
-    <script src="admin.js"></script>
+    <script src="index.js"></script>
 </body>
 </html>
